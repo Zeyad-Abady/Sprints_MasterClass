@@ -1,0 +1,14 @@
+Query 1:
+
+Select FirstName, LastName, Count(Orderid) as Number_of_orders from (select Employees.FirstName, Employees.LastName, Orders.Orderid from employees inner join orders on employees.employeeid = orders.employeeid)
+group by FirstName, LastName
+order by Count(Orderid) desc
+limit 10
+
+
+Query 2:
+select FirstName, LastName, count(CategoryName) as Sold_Most_Beverages from
+(select Employees.Firstname, Employees.LastName, Categories.CategoryName from employees inner join Orders on Employees.employeeid = orders.employeeid
+inner join orderdetails on orders.orderid = orderdetails.orderid inner join products on orderdetails.productid = products.productid inner join categories on products.categoryid = categories.categoryid)
+where categoryname = 'Beverages'
+group by FirstName, LastName, CategoryName order by Count(CategoryName) desc limit 10
