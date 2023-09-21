@@ -1,0 +1,26 @@
+trait Vehicle {
+  def name: String
+  def speed: Double
+}
+
+case class Car(name: String, speed: Double) extends Vehicle
+case class Bike(name: String, speed: Double) extends Vehicle
+case class Truck(name: String, speed: Double, cap: Double) extends Vehicle
+
+object MCApp extends App {
+  val compareVehicleSpeeds: (Vehicle, Vehicle) => Vehicle = (v1, v2) =>
+    if (v1.speed > v2.speed) v1 else v2
+
+  val car1 = Car("Car1", 105)
+  val car2 = Car("Car2", 200)
+  val bike1 = Bike("Bike1", 100)
+  val truck1 = Truck("truck1", 80, 100)
+
+  println(s"Vehicle: ${car1.name} has speed ${car1.speed}")
+  println(s"Vehicle: ${car2.name} has speed ${car2.speed}")
+  println(s"Vehicle: ${bike1.name} has speed ${bike1.speed}")
+  println(s"Vehicle: ${truck1.name} has speed ${truck1.speed}")
+
+  println("Comparing Vehicles")
+  val fasterVehicle = compareVehicleSpeeds(car1, car2)
+  println(s"Vehicle: ${fasterVehicle.name} is faster with speed: ${fasterVehicle.speed
