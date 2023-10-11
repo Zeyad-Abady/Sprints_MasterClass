@@ -28,6 +28,9 @@ STORED as TEXTFILE
 LOCATION '/user/cloudera/ds/COVID_HDFS_LZ'
 tblproperties ("skip.header.line.count"="1");
 
+LOAD DATA INPATH '/user/raj_ops/home/cloudera/covid_project/landing_zone/covid-19' into table covid_db.covid_staging;
+
+
 CREATE EXTERNAL TABLE IF NOT EXISTS covid_db.covid_ds_partitioned 
 (
  Country 			                STRING,
@@ -57,14 +60,3 @@ FROM
 covid_db.covid_sample_ds
 INSERT INTO TABLE covid_db.covid_ds_partitioned PARTITION(COUNTRY_NAME)
 SELECT *,Country WHERE Country is not null;
-
-
-CREATE EXTERNAL TABLE covid_db.covid_final_output 
-(
- TOP_DEATH 			                STRING,
- TOP_TEST 			                STRING
-)
-PARTITIONED BY (COUNTRY_NAME STRING)
-ROW FORMAT DELIMITED FIELDS TERMINATED by ','
-STORED as TEXTFILE
-LOCATION '/user/cloudera/ds/COVID_FINAL_OUTPUT';
