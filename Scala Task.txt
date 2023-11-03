@@ -23,4 +23,5 @@ object MCApp extends App {
 
   println("Comparing Vehicles")
   val fasterVehicle = compareVehicleSpeeds(car1, car2)
-  println(s"Vehicle: ${fasterVehicle.name} is faster with speed: ${fasterVehicle.speed
+  println(s"Vehicle: ${fasterVehicle.name} is faster with speed: ${fasterVehicle.speed})
+}
